@@ -25,6 +25,12 @@ lint: ## Lint and format check
 fmt: ## Autofix lint and format
 	cd backend && ruff check --fix . && ruff format .
 
+flusher: ## Run the flusher against the dev stack (needs: make deps)
+	cd backend && python -m app.flusher
+
+flusher-logs: ## Tail the containerised flusher's logs
+	$(COMPOSE) logs -f flusher
+
 migrate: ## Apply migrations
 	cd backend && alembic upgrade head
 

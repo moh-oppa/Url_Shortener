@@ -41,6 +41,17 @@ class Settings(BaseSettings):
 
     link_cache_ttl_seconds: int = Field(default=3600, ge=1)
 
+    link_negative_cache_ttl_seconds: int = Field(default=60, ge=1)
+    click_stream_maxlen: int = Field(default=100_000, ge=1)
+
+    flusher_batch_size: int = Field(default=1000, ge=1)
+    flusher_block_ms: int = Field(default=5000, ge=1)
+
+    flusher_claim_idle_ms: int = Field(default=60_000, ge=0)
+    click_events_retention_days: int = Field(default=90, ge=1)
+
+    geoip_db_path: str | None = None
+
     @property
     def is_production(self) -> bool:
         return self.environment == "production"

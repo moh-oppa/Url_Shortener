@@ -59,8 +59,6 @@ class LinkOut(BaseModel):
 
 
 class CountBucket(BaseModel):
-    """One row of a grouped count, e.g. {"key": "NG", "clicks": 412}."""
-
     key: str
     clicks: int
 

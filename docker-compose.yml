@@ -61,6 +61,21 @@ services:
       retries: 10
     restart: unless-stopped
 
+  flusher:
+    build:
+      context: ./backend
+    command: ["python", "-m", "app.flusher"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://shortener:shortener@postgres:5432/shortener
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
 volumes:
   pgdata:
   redisdata:
